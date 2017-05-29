@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html ng-app='formapp'>
+<head>
+	<meta charset="UTF-8">
+	<title>真实热经历场景中的个体热舒适评价</title>
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+	<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=41ddcc14f9de18a2dad0703efad208f7"></script> 
+	<script type="text/javascript" src="static/js/controller.js"></script>
+	<style>
+		#map {width:100%; height: 180px; } 
+	</style>
+
+<body>
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<div class="panel-title text-center"><h2>真实热经历场景中的个体热舒适评价</h2></div>
+		</div>
+		<div class="panel-body container">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<div class="text-center"><h4>我们承诺：本调查的所有数据均用于科学研究，个人信息将为您保密。非常感谢您的支持与配合！</h4></div>
+					<div class="text-right">————清华大学建筑学院</div>
+				</div>	
+			</div>
+			<div class="panel panel-info">
+				<br>
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<form class="form-horizontal" role="form" ng-controller="formctrl" accept-charset='UTF-8'>
+							<!-- <div>test: {{master}} </div> -->
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<div class="form-group">
+										<label class="col-md-4 col-sm-4 col-xs-4 control-label">
+											您的姓名：
+										</label>
+										<div class="col-md-7 col-sm-7 col-xs-7">
+											<input type="text" class="form-control" id="name" placeholder="姓名" ng-model="master.name">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<div class="form-group">
+										<label class="col-md-4 col-sm-4 col-xs-4 control-label">
+											 填写问卷时所在地点的建筑类型
+										</label>
+										<div class="col-md-8 col-sm-8 col-xs-8">
+											<div class="radio">
+												<label >
+													<input type="radio" name="placeRadio" id="placeRadio1" value="1" ng-model="master.placeRadio">
+													教学楼
+												</label>
+											</div>
+											<div class="radio">
+												<label >
+													<input type="radio" name="placeRadio" id="placeRadio2" value="2" ng-model="master.placeRadio">
+													宿舍楼
+												</label>
+											</div>
+											<div class="radio">
+												<label >
+													<input type="radio" name="placeRadio" id="placeRadio3" value="3" ng-model="master.placeRadio">
+													食堂
+												</label>
+											</div>
+											<div class="radio">
+												<label >
+													<input type="radio" name="placeRadio" id="placeRadio4" value="4" ng-model="master.placeRadio">
+													运动场（如 篮球场，游泳馆，健身房）
+												</label>
+											</div>
+											<div class="radio">
+												<label >
+													<input type="radio" name="placeRadio" id="placeRadio5" value="5" ng-model="master.placeRadio">
+													系馆
+												</label>
+											</div>
+											<div class="radio">
+												<label >
+													<input type="radio" name="placeRadio" id="placeRadio6" value="6" ng-model="master.placeRadio">
+													其他（如 大礼堂，校医院等）
+												</label>
+											</div>
+											<div class="radio">
+												<label >
+													<input type="radio" name="placeRadio" id="placeRadio7" value="7" ng-model="master.placeRadio">
+													校外建筑（如 商场，地铁站等）
+												</label>
+											</div>
+											<div class="radio">
+												<label >
+													<input type="radio" name="placeRadio" id="placeRadio8" value="8" ng-model="master.placeRadio">
+													室外
+												</label>
+											</div>
+										</div>
+									</div>								
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<div class="form-group">
+										<label class="col-md-4 col-sm-4 col-xs-4 control-label">
+											填写问卷时所在的具体地点
+										</label>
+										<div class="col-md-7 col-sm-7 col-xs-7">
+											<input type="text" class="form-control" id="placetyped" placeholder="提示：如 三教1011，紫荆5#228A，桃李园2层，建筑馆S116 等" ng-model="master.placetyped">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<div class="form-group">
+										<label class="col-md-4 col-sm-4 col-xs-4 control-label">
+											填写问卷的前一时刻所从事的活动
+										</label>
+										<div class="col-md-8 col-sm-8 col-xs-8">
+											<div class="radio">
+												<label >
+													<input type="radio" name="beforeAction" id="beforeAction1" value="1" ng-model="master.beforeAction">
+													躺卧
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+													<input type="radio" name="beforeAction" id="beforeAction2" value="2" ng-model="master.beforeAction">
+													坐或站立
+												</label>
+											</div>
+											<div class="radio">
+												<label >
+													<input type="radio" name="beforeAction" id="beforeAction3" value="3" ng-model="master.beforeAction">
+													轻度活动（如步行）
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+													<input type="radio" name="beforeAction" id="beforeAction4" value="4" ng-model="master.beforeAction">
+													中度活动（如骑自行车）
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+													<input type="radio" name="beforeAction" id="beforeAction5" value="5" ng-model="master.beforeAction">
+													剧烈活动（如打篮球）
+												</label>
+											</div>
+										</div>
+									</div>								
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<div class="form-group">
+										<label class="col-md-4 col-sm-4 col-xs-4 control-label">
+											填写问卷时的上衣着装情况
+										</label>
+										<div class="col-md-8 col-sm-8 col-xs-8">
+											<div class="radio">
+												<label>
+													<input type="radio" name="jacket" id="jacket1" value="1" ng-model="master.jacket">
+													短袖
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+													<input type="radio" name="jacket" id="jacket2" value="2" ng-model="master.jacket">
+													长袖
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+													<input type="radio" name="jacket" id="jacket3" value="3" ng-model="master.jacket">
+													短袖+外套
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+													<input type="radio" name="jacket" id="jacket4" value="4" ng-model="master.jacket">
+													长袖+外套
+												</label>
+											</div>
+										</div>
+									</div>									
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<div class="form-group">
+										<label class="col-md-4 col-sm-4 col-xs-4 control-label">
+											填写问卷时的下衣着装情况
+										</label>
+										<div class="col-md-8 col-sm-8 col-xs-8">
+											<div class="radio">
+												<label>
+													<input type="radio" name="trousers" id="trousers1" value="1" ng-model="master.trousers">
+													短裤
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+													<input type="radio" name="trousers" id="trousers2" value="2" ng-model="master.trousers">
+													长裤
+												</label>
+											</div>
+											<div class="radio">
+												<label >
+													<input type="radio" name="trousers" id="trousers3" value="3" ng-model="master.trousers">
+													秋裤+长裤
+												</label>
+											</div>
+										</div>
+									</div>									
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<div class="form-group">
+										<label class="col-md-4 col-sm-4 col-xs-4 control-label">
+											你对当前温度的评价
+										</label>
+										<div class="col-md-8 col-sm-8 col-xs-8">
+											<div class="radio">
+												<label>
+													<input type="radio" name="temperature" id="temperature1" value="1" ng-model="master.temperature">
+													非常冷
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+													<input type="radio" name="temperature" id="temperature2" value="2" ng-model="master.temperature">
+													冷
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+													<input type="radio" name="temperature" id="temperature3" value="3" ng-model="master.temperature">
+													微冷
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+													<input type="radio" name="temperature" id="temperature4" value="4" ng-model="master.temperature">
+													适中
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+													<input type="radio" name="temperature" id="temperature5" value="5" ng-model="master.temperature">
+													微热
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+													<input type="radio" name="temperature" id="temperature6" value="6" ng-model="master.temperature">
+													热
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+													<input type="radio" name="temperature" id="temperature7" value="7" ng-model="master.temperature">
+													非常热
+												</label>
+											</div>
+										</div>
+									</div>									
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<div class="form-group">
+										<label class="col-md-4 col-sm-4 col-xs-4 control-label">
+											你对当前温度舒适感的评价
+										</label>
+										<div class="col-md-8 col-sm-8 col-xs-8">
+											<div class="radio">
+												<label>
+													<input type="radio" name="confortable" id="confortable1" value="1" ng-model="master.confortable">
+													舒适
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+													<input type="radio" name="confortable" id="confortable2" value="2" ng-model="master.confortable">
+													轻微不舒适
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+													<input type="radio" name="confortable" id="confortable3" value="3" ng-model="master.confortable">
+													不舒适
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+													<input type="radio" name="confortable" id="confortable4" value="4" ng-model="master.confortable">
+													非常不舒适
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+													<input type="radio" name="confortable" id="confortable5" value="5" ng-model="master.confortable">
+													不能忍受
+												</label>
+											</div>
+										</div>
+									</div>									
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<div class="form-group">
+										<label class="col-md-4 col-sm-4 col-xs-4 control-label">
+											你对当前环境的整体满意度
+										</label>
+										<div class="col-md-8 col-sm-8 col-xs-8">
+											<div class="radio">
+												<label>
+													<input type="radio" name="totalconf" id="totalconf1" value="1" ng-model="master.totalconf">
+													非常不满意
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+													<input type="radio" name="totalconf" id="totalconf2" value="2" ng-model="master.totalconf">
+													不满意
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+													<input type="radio" name="totalconf" id="totalconf3" value="3" ng-model="master.totalconf">
+													说不清楚
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+													<input type="radio" name="totalconf" id="totalconf4" value="4" ng-model="master.totalconf">
+													满意
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+													<input type="radio" name="totalconf" id="totalconf5" value="5" ng-model="master.totalconf">
+													非常满意
+												</label>
+											</div>
+										</div>
+									</div>									
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<div class="form-group">
+										<label class="col-md-4 col-sm-4 col-xs-4 control-label">
+											若配有测心率的仪器，请记录当前数据
+										</label>
+										<div class="col-md-7 col-sm-7 col-xs-7">
+											<input type="text" class="form-control" id="beats" placeholder="此项可以不填" ng-model="master.beats">
+										</div>
+									</div>									
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<label>
+										依次点击以下两个按钮获取你的位置与经纬度
+									</label>
+								</div>
+								<div class="panel-body">
+									<div class="col-md-12 col-sm-12 col-xs-12">
+										<button type="button" class="btn btn-success" id="localtion" ng-click="nearme()">点击获取位置</button>
+										
+										<div id="map"></div>
+										<div id="tip"></div>
+
+										<button class="btn btn-success" ng-click="nearme()">点击获取经纬度</button>
+									</div>
+									<div class="form-group">
+										<div class="col-md-12 col-sm-12 col-xs-12">
+											<label class="col-md-4 col-sm-4 col-xs-4 control-label" >
+												经度(自动生成,无需填写)
+											</label>
+											<div class="col-md-8 col-sm-8 col-xs-8">
+												<input type="text" class="form-control" id="disabledInput" placeholder="此处内容不用填写，会自动生成" ng-model="master.lon" disabled>
+											</div>
+										</div>
+										<div class="col-md-12 col-sm-12 col-xs-12">
+											<label class="col-md-4 col-sm-4 col-xs-4 control-label" >
+												纬度(自动生成,无需填写)
+											</label>
+											<div class="col-md-8 col-sm-8 col-xs-8">
+												<input type="text" class="form-control" id="disabledInput" placeholder="此处内容不用填写，会自动生成" ng-model="master.lat" disabled>
+											</div>
+										</div>
+										
+									</div>								
+								</div>
+							</div>
+							<button type="submit" class="btn btn-primary col-md-12 col-sm-12 col-xs-12" ng-click="create_form()">提交</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</body>
+
+<script type="text/javascript">
+	(function (){
+		var mapHeight = 180;
+		document.getElementById('map').style.height = mapHeight + 'px';
+		var map = new AMap.Map('map'), geolocation = null, result = document.getElementById('result');
+		map.plugin('AMap.Geolocation', function () {
+			geolocation = new AMap.Geolocation({
+				enableHighAccuracy: true,//是否使用高精度定位，默认:true
+				timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+				maximumAge: 0,           //定位结果缓存0毫秒，默认：0
+				convert: true,           //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
+				showButton: true,        //显示定位按钮，默认：true
+				buttonPosition: 'LB',    //定位按钮停靠位置，默认：'LB'，左下角
+				buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+				showMarker: true,        //定位成功后在定位到的位置显示点标记，默认：true
+				showCircle: true,        //定位成功后用圆圈表示定位精度范围，默认：true
+				panToLocation: true,     //定位成功后将定位到的位置作为地图中心点，默认：true
+				zoomToAccuracy:true      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+			});
+	        map.addControl(geolocation);
+			AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
+			AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
+		});
+		
+		/*
+		 *获取当前位置信息
+		 */
+		function getCurrentPosition () {
+			geolocation.getCurrentPosition();
+		};
+		/*
+		 *监控当前位置并获取当前位置信息
+		 */
+		function watchPosition () {
+			geolocation.watchPosition();
+		};
+		/*
+		 *解析定位结果
+		 */
+		function onComplete (data) {
+			var str = '<p>定位成功</p>';
+			str += '<p>经度：' + data.position.getLng() + '</p>';
+			str += '<p>纬度：' + data.position.getLat() + '</p>'; 
+			str += '<p>精度：' + data.accuracy + ' 米</p>';
+			str += '<p>是否经过偏移：' + (data.isConverted ? '是' : '否') + '</p>';
+			// result.innerHTML = str;
+		};
+		/*
+		 *解析定位错误信息
+		 */
+		function onError (data) {
+			var str = '<p>定位失败</p>';
+			str += '<p>错误信息：'
+			switch(data.info) {
+				case 'PERMISSION_DENIED':
+					str += '浏览器阻止了定位操作';
+					break;
+				case 'POSITION_UNAVAILBLE':
+					str += '无法获得当前位置';
+					break;
+				case 'TIMEOUT':
+					str += '定位超时';
+					break;
+				default:
+					str += '未知错误';
+					break;
+			}
+			str += '</p>';
+			result.innerHTML = str;
+		};
+		
+		document.getElementById('localtion').onclick = function(){
+			getCurrentPosition();
+		};
+		
+
+	})();
+
+</script>
+</html>
